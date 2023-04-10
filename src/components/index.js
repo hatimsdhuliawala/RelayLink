@@ -1,12 +1,8 @@
-'use strict';
-
 import React from 'react';
 import RelayLinkComponent from './relayLink';
 import LoginPage from './loginPage'
-import axios from 'axios';
+// import axios from 'axios';
 import  ITSDATA from '../data/itsData'
-const SteinStore = require("stein-js-client");
-
 
 class RelayComponent extends React.Component {
   constructor(props) {

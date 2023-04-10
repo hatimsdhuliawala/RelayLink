@@ -1,4 +1,3 @@
-'use strict';
 import ErrorStateComponent from './errorState';
 
 const LoginPage = (props) => {

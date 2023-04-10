@@ -1,5 +1,3 @@
-'use strict';
-
 const errorState = (props) => {
     return (
       <div className="error-section">
