@@ -106,7 +106,6 @@ class RelayComponent extends React.Component {
             setITSNumber={this.setITSNumber}
             ITSNumber={this.state.ITSNumber}
             isLoading={this.state.isLoading}
-            ITSNumber={this.state.ITSNumber}
             errorState={this.state.errorState}
             />
         }
