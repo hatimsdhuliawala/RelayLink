@@ -11,10 +11,10 @@ const relayLink = (props) => {
           scrolling="no"
           allow="autoplay"
           allowFullScreen
-          webkitallowfullscreen
-          mozallowfullscreen
-          oallowfullscreen
-          msallowfullscreen></iframe>
+          webkitallowfullscreen="webkitallowfullscreen"
+          mozallowfullscreen="mozallowfullscreen"
+          oallowfullscreen="oallowfullscreen"
+          msallowfullscreen="msallowfullscreen"></iframe>
 
         <div className='input-group'>
           <button className="logout-button" onClick={logout}>LOGOUT</button>

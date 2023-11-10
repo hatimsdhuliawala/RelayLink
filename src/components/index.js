@@ -1,8 +1,8 @@
 import React from 'react';
 import RelayLinkComponent from './relayLink';
-import LoginPage from './loginPage'
-// import axios from 'axios';
-import  ITSDATA from '../data/itsData'
+import LoginPage from './loginPage';
+import axios from 'axios';
+import  config from '../data/configData';
 
 class RelayComponent extends React.Component {
   constructor(props) {
@@ -49,49 +49,48 @@ class RelayComponent extends React.Component {
       })
 
     // Handling with local json file
-      if(ITSDATA.ITSNUMBERS.includes(Number(this.state.ITSNumber))) {
-        this.setState({
-          errorState: false,
-          isLoggedIn: true,
-          isLoading: false,
-        });
-        window.sessionStorage.setItem("isLoggedIn", true)
-      } else {
-        this.setState({
-          errorState: true,
-          isLoggedIn: false,
-          isLoading: false,
-        });
-        window.sessionStorage.setItem("isLoggedIn", false)
-      }
+      // if(ITSDATA.ITSNUMBERS.includes(Number(this.state.ITSNumber))) {
+      //   this.setState({
+      //     errorState: false,
+      //     isLoggedIn: true,
+      //     isLoading: false,
+      //   });
+      //   window.sessionStorage.setItem("isLoggedIn", true)
+      // } else {
+      //   this.setState({
+      //     errorState: true,
+      //     isLoggedIn: false,
+      //     isLoading: false,
+      //   });
+      //   window.sessionStorage.setItem("isLoggedIn", false)
+      // }
 
-      //  Handling with Google Sheets
+      //  Handling with ASC API
+      let test = config.url + config.GETDATA
+      axios.get(test).then(response => {
+        this.setState({
+          isLoading: false,
+        })
 
-    //   let url = 'https://sheet2api.com/v1/cTIVlAVaSOSt/relay-link'
-    //   axios.get(url).then(response => {
-    //     this.setState({
-    //       isLoading: false,
-    //     })
-    //     let VALIDITSNUMBER = response.data.find(data => data.ITSNumber === Number(this.state.ITSNumber.trim()))
-    //
-    //     console.log(VALIDITSNUMBER)
-    //     if (Object.keys(VALIDITSNUMBER).length === 0) {
-    //       this.setState({
-    //         errorState: true,
-    //         isLoggedIn: false,
-    //       });
-    //       window.sessionStorage.setItem("isLoggedIn", false)
-    //     } else {
-    //       this.setState({
-    //         errorState: false,
-    //         isLoggedIn: true,
-    //       });
-    //
-    //       window.sessionStorage.setItem("isLoggedIn", true)
-    //     }
-    // }).catch((error, data) => {
-    //   this.setState({errorState: true});
-    // })
+        let ValidITSNumber = response.data.includes(this.state.ITSNumber)
+
+        if (!ValidITSNumber) {
+          this.setState({
+            errorState: true,
+            isLoggedIn: false,
+          });
+          window.sessionStorage.setItem("isLoggedIn", false)
+        } else {
+          this.setState({
+            errorState: false,
+            isLoggedIn: true,
+          });
+
+          window.sessionStorage.setItem("isLoggedIn", true)
+        }
+      }).catch((error, data) => {
+        this.setState({errorState: true});
+      })
   }
 
 
