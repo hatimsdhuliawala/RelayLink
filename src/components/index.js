@@ -74,19 +74,20 @@ class RelayComponent extends React.Component {
 
         let ValidITSNumber = response.data.includes(this.state.ITSNumber)
 
-        if (!ValidITSNumber) {
+        if (ValidITSNumber) {
           this.setState({
-            errorState: true,
-            isLoggedIn: false,
-          });
-          window.sessionStorage.setItem("isLoggedIn", false)
+             errorState: false,
+             isLoggedIn: true,
+             isLoading: false,
+           });
+           window.sessionStorage.setItem("isLoggedIn", true)
         } else {
           this.setState({
-            errorState: false,
-            isLoggedIn: true,
-          });
-
-          window.sessionStorage.setItem("isLoggedIn", true)
+             errorState: true,
+             isLoggedIn: false,
+             isLoading: false,
+           });
+           window.sessionStorage.setItem("isLoggedIn", false)
         }
       }).catch((error, data) => {
         this.setState({errorState: true});
